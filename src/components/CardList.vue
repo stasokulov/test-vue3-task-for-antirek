@@ -4,6 +4,24 @@
     @drop="onDrop($event, options.id)"
     @dragover.prevent
     @dragenter.prevent>
+
+    <v-item-group selected-class="bg-primary">
+      <v-row>
+        <v-col
+          v-for="item in panelArr" :key="item.fn"
+          cols="12"
+          md="4">
+          <v-btn
+            v-bind="props"
+            :icon="item.icon"
+            density="compact"
+            variant="tonal"
+            class="sort-btn"
+            color="blue"
+            @click="item.fn" />
+        </v-col>
+      </v-row>  
+    </v-item-group>
     <div class="title">
       <h2>
         {{ options.title }}
@@ -129,6 +147,34 @@
         break;
     }
   }
+
+  const sortListUp = () => {
+    getLocalCards();
+    cards = cards.value.sort((a, b) => b.rating.rate - a.rating.rate);
+  }
+  const sortListDown = () => {
+    getLocalCards();
+    cards = cards.value.sort((a, b) => a.rating.rate - b.rating.rate);
+  }
+  const abortSortList = () => {
+    getLocalCards();
+    cards = cards.value.sort((a, b) => a.id - b.id);
+  }
+
+  const panelArr = [
+    {
+      fn: sortListUp,
+      icon: "mdi-sort-numeric-ascending"
+    },
+    {
+      fn: sortListDown,
+      icon: "mdi-sort-numeric-descending"
+    },
+    {
+      fn: abortSortList,
+      icon: "mdi-sort-variant-off"
+    }
+  ]
 </script>
 
 <style lang="scss" scoped>
