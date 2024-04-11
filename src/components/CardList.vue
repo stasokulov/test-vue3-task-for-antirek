@@ -150,15 +150,15 @@
 
   const sortListUp = () => {
     getLocalCards();
-    cards = cards.value.sort((a, b) => b.rating.rate - a.rating.rate);
+    cards.value = cards.value.sort((a, b) => b.rating.rate - a.rating.rate);
   }
   const sortListDown = () => {
     getLocalCards();
-    cards = cards.value.sort((a, b) => a.rating.rate - b.rating.rate);
+    cards.value = cards.value.sort((a, b) => a.rating.rate - b.rating.rate);
   }
   const abortSortList = () => {
     getLocalCards();
-    cards = cards.value.sort((a, b) => a.id - b.id);
+    cards.value = cards.value.sort((a, b) => a.id - b.id);
   }
 
   const panelArr = [
